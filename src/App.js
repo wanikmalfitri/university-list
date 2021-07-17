@@ -1,8 +1,11 @@
+import Routers from "./router.js"
+import React from "react";
+
 function App() {
   return (
-    <div className="App bg-blue-500">
-      Hello World
-    </div>
+    <React.Fragment>
+      <Routers/>
+    </React.Fragment>
   );
 }
 
