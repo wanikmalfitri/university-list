@@ -1,15 +1,45 @@
-import React from "react";
-import { Layout, Container } from "../components";
+import React, { useMemo } from "react";
+import { Container, CustomTable } from "../components";
 import { uniList } from "../api/university";
+import { data } from "browserslist";
+
 const Home = () => {
+  const columns = useMemo(() => [
+    {
+      Header: "Name",
+      accessor: "name",
+    },
+    {
+      Header: "Country",
+      accessor: "country",
+    },
+    {
+      Header: "Website",
+      id: "web_pages[0]",
+      accessor: (list) => (
+        <a className="text-primary" href={list.web_pages[0]}>
+          {list.web_pages[0]}
+        </a>
+      ),
+    },
+  ]);
+
+  const columnsMobile = useMemo(() => [
+    {
+      Header: "University",
+      id: "details",
+      accessor: <React.Fragment>{}</React.Fragment>,
+    },
+  ]);
+
   return (
-    <Layout>
-      <section className="pt-16 pb-8" id="Hero">
+    <React.Fragment>
+      <section className="pt-16 pb-32 bg-primary" id="Hero">
         <Container>
-          <div className="text-center font-bold text-3xl text-primary-darkest">
+          <div className="text-center font-bold text-3xl text-white">
             All university informations in one place
           </div>
-          <div className="text-center mt-4">
+          <div className="text-center mt-8">
             <select
               className="text-xs bg-primary-lighter font-semibold px-4 py-2 rounded-full focus:outline-none"
               value="default"
@@ -19,51 +49,12 @@ const Home = () => {
           </div>
         </Container>
       </section>
-      <section className="mb-8" id="UniList">
+      <section className="mb-16 -mt-24" id="UniList">
         <Container>
-          <table className="w-full border border-primary-lighter">
-            <thead className="bg-primary-lighter font-semibold text-xs uppercase text-left">
-              <tr>
-                <th scope="col" className="py-2 px-4">
-                  Name
-                </th>
-                <th scope="col" className="py-2 px-4">
-                  Country
-                </th>
-                <th scope="col" className="py-2 px-4">
-                  Website
-                </th>
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-primary-lighter border-r border-l border-b border-primary-lighter text-sm">
-              {uniList.map((uni, index) => (
-                <tr>
-                  <td className="py-2 px-4">{uni.name}</td>
-                  <td className="py-2 px-4">{uni.country}</td>
-                  <td className="py-2 px-4">
-                    <a
-                      className="text-primary cursor-pointer"
-                      href={uni.web_pages[0]}
-                    >
-                      {uni.web_pages[0]}
-                    </a>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <CustomTable columns={columns} data={uniList} />
         </Container>
       </section>
-      <section className="mb-8">
-        <Container>
-          <div className="rounded bg-primary-lightest p-8">
-            <div className="font-bold text-2xl text-center">
-              Subscribe to our newsletter
-            </div>
-          </div>
-        </Container>
-      </section>
-    </Layout>
+    </React.Fragment>
   );
 };
 

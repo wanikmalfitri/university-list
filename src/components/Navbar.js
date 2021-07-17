@@ -1,18 +1,35 @@
 import React from "react";
 import { Container } from "./";
-import { MenuIcon } from "@heroicons/react/outline";
+import { Link } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({ page }) => {
   return (
-    <header className="flex flex-shrink border-b border-primary-light">
+    <header className="flex flex-shrink bg-primary">
       <Container>
         <nav className="py-4 flex items-center justify-between">
           <div className="">
-            <span className="font-semibold text-primary-darkest text-lg">
+            <Link to="/" className="font-semibold text-white text-lg">
               TheUniList
-            </span>
+            </Link>
           </div>
-          <MenuIcon className="h-6 w-6 hover:text-primary cursor-pointer" />
+          <div className="space-x-2">
+            {page !== "signup" ? (
+              <Link
+                to="/signup"
+                className="text-xs px-4 py-2 rounded bg-secondary font-semibold"
+              >
+                Sign up
+              </Link>
+            ) : null}
+            {page !== "login" ? (
+              <Link
+                to="/login"
+                className="text-xs px-4 py-2 rounded bg-primary-darkest text-white font-semibold"
+              >
+                Login
+              </Link>
+            ) : null}
+          </div>
         </nav>
       </Container>
     </header>
