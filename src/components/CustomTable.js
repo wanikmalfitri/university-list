@@ -1,5 +1,6 @@
 import React from "react";
 import { useTable, usePagination } from "react-table";
+import { ChevronRightIcon, ChevronLeftIcon } from "@heroicons/react/solid";
 
 const CustomTable = ({ columns, data }) => {
   const {
@@ -10,13 +11,11 @@ const CustomTable = ({ columns, data }) => {
     page,
     canPreviousPage,
     canNextPage,
-    pageOptions,
     pageCount,
     gotoPage,
     nextPage,
     previousPage,
-    setPageSize,
-    state: { pageIndex, pageSize },
+    state: { pageIndex },
   } = useTable(
     {
       columns,
@@ -75,7 +74,7 @@ const CustomTable = ({ columns, data }) => {
           onClick={() => gotoPage(0)}
           disabled={!canPreviousPage}
         >
-          1
+          <div className="w-4 h-4 text-center">1</div>
         </button>
         <button
           className={`${
@@ -86,10 +85,10 @@ const CustomTable = ({ columns, data }) => {
           onClick={() => previousPage()}
           disabled={!canPreviousPage}
         >
-          {"<"}
+          <ChevronLeftIcon className="w-4 h-4" />
         </button>
         <div className="inline-flex px-3 py-2 rounded bg-primary-darkest text-xs text-white">
-          {pageIndex + 1}
+          <div className="w-4 h-4 text-center">{pageIndex + 1}</div>
         </div>
         <button
           className={`${
@@ -98,7 +97,7 @@ const CustomTable = ({ columns, data }) => {
           onClick={() => nextPage()}
           disabled={!canNextPage}
         >
-          {">"}
+          <ChevronRightIcon className="w-4 h-4" />
         </button>
         <button
           className={`${
@@ -107,7 +106,7 @@ const CustomTable = ({ columns, data }) => {
           onClick={() => gotoPage(pageCount - 1)}
           disabled={!canNextPage}
         >
-          {pageCount - 1}
+          <div className="w-4 h-4 text-center">{pageCount - 1}</div>
         </button>
       </div>
     </>

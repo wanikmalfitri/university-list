@@ -146,7 +146,7 @@ const UniversityList = () => {
                   <option value="name">Name</option>
                   <option value="country">Country</option>
                 </select>
-                <div className="hidden md:flex absolute inset-y-0 top-0 right-4 pr-3 items-center pointer-events-none">
+                <div className="hidden md:flex absolute inset-y-0 top-0 right-4 pl-3 items-center pointer-events-none">
                   <ChevronDownIcon className="w-4 h-4" />
                 </div>
               </div>
